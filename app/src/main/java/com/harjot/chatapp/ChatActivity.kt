@@ -55,10 +55,7 @@ class ChatActivity : AppCompatActivity() {
         binding.cvSend.setOnClickListener {
             val message = binding.messageBox.text.toString()
             val messageObject = MessageModel(message, senderUid)
-            if (binding.messageBox.text.toString().trim().isNullOrEmpty()){
-                return@setOnClickListener
-             }
-            else{
+            if (binding.messageBox.text.toString().trim().isNotEmpty()){
                 mDbRef.child("chats").child(senderRoom!!).child("messages").push()
                     .setValue(messageObject).addOnSuccessListener {
                         mDbRef.child("chats").child(receiverRoom!!).child("messages").push()
